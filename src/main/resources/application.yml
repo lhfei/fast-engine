@@ -16,9 +16,9 @@ logging:
 spring:
   datasource:
     driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
-    url: jdbc:clickhouse://10.182.57.104/benchmark
+    url: jdbc:clickhouse://10.196.73.108:8123/bc_online
     username: default
-    password: Lhfei
+    password: 
     
 #    druid:
 #      initial-size: 5
