@@ -54,10 +54,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
@@ -90,15 +90,20 @@
 		</dependency>
 		
 		<!-- Alibaba Druid Connect Pool -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>druid-spring-boot-starter</artifactId>
 		    <version>${alibaba.druid.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
 		</dependency>
 	</dependencies>
 
