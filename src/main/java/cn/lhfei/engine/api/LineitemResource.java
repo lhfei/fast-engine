@@ -44,7 +44,7 @@ public class LineitemResource extends AbstractResource {
 	@RequestMapping(value = "/lineitems", method = GET)
 	public List<String> getFiles(@RequestParam Integer limit) throws ClassNotFoundException, SQLException {
 		
-		String sql = "SELECT * FROM hive.benchmark.lineitem LIMIT ?";
+		String sql = "SELECT * FROM benchmark.lineitem LIMIT ?";
 		List<String> result = new ArrayList<>();
 		
 		jdbcTemplate.query(sql, new Object[] {limit}, new RowMapper<List<String>>() {
