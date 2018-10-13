@@ -1,0 +1,45 @@
+server:
+  port: 11000
+  servlet:
+    context-path: /api/v1/
+logging:
+  level:
+    .: info
+    cn.lhfei.engine: debug
+    org.springframework: info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+
+# Druid datasource settings:
+spring:
+  datasource:
+    driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
+    url: jdbc:clickhouse://10.182.57.111:8123/benchmark
+    username: default
+    password: Lhfei
+
+    druid:
+      initial-size: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      connectionProperties: druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000
+      #useGlobalDataSourceStat: true
+      
+mybatis:
+  type-aliases-package: cn.lhfei.engine.orm.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 1000
+    default-statement-timeout: 50 
