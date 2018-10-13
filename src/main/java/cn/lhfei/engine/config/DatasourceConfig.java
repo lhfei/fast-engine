@@ -57,9 +57,16 @@ private Logger LOG = LoggerFactory.getLogger(DatasourceConfig.class);
         dataSource.setJdbcUrl(dbUrl);
         dataSource.setUser(username);
         dataSource.setPassword(password);
-        dataSource.setMinPoolSize(c3p0MinSize);
-        dataSource.setMaxPoolSize(c3p0MaxSize);
+        dataSource.setMinPoolSize(c3p0MinPoolSize);
+        dataSource.setMaxPoolSize(c3p0MaxPoolSize);
+        dataSource.setInitialPoolSize(initialPoolSize);
+        dataSource.setMaxIdleTime(maxIdleTime);
         dataSource.setMaxIdleTime(poolIdlePeriod);
+        dataSource.setAcquireIncrement(acquireIncrement);
+        dataSource.setMaxStatements(maxStatements);
+        dataSource.setMaxStatementsPerConnection(maxStatementsPerConnection);
+        dataSource.setNumHelperThreads(numHelperThreads);
+        dataSource.setPropertyCycle(propertyCycle);
 
         return dataSource;
     }
@@ -76,12 +83,33 @@ private Logger LOG = LoggerFactory.getLogger(DatasourceConfig.class);
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
     
-    @Value("${c3p0.max_size}")
-    private int c3p0MaxSize;
+    @Value("${c3p0.max_pool_size}")
+    private int c3p0MaxPoolSize;
     
-    @Value("${c3p0.min_size}")
-    private int c3p0MinSize;
+    @Value("${c3p0.min_pool_size}")
+    private int c3p0MinPoolSize;
     
     @Value("${c3p0.idle_test_period}")
     private int poolIdlePeriod;
+    
+    @Value("${c3p0.max_idle_time}")
+    private int maxIdleTime;
+    
+    @Value("${c3p0.initial_pool_size}")
+    private int initialPoolSize;
+    
+    @Value("${c3p0.acquire_increment}")
+    private int acquireIncrement;
+    
+    @Value("${c3p0.max_statements}")
+    private int maxStatements;
+    
+    @Value("${c3p0.max_statements_per_connection}")
+    private int maxStatementsPerConnection;
+    
+    @Value("${c3p0.num_helper_threads}")
+    private int numHelperThreads;
+    
+    @Value("${c3p0.property_cycle}")
+    private int propertyCycle;
 }

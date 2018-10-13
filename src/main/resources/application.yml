@@ -38,9 +38,16 @@ spring:
 #      #useGlobalDataSourceStat: true
 
 # c3p0  pooling
-c3p0.max_size: 600
-c3p0.min_size: 5
-c3p0.idle_test_period: 600
+c3p0.max_pool_size: 1000
+c3p0.min_pool_size: 5
+c3p0.initial_pool_size: 5
+c3p0.max_idle_time: 21600
+c3p0.idle_test_period: 10800
+c3p0.acquire_increment: 5
+c3p0.max_statements: 10
+c3p0.max_statements_per_connection: 5
+c3p0.num_helper_threads: 10
+c3p0.property_cycle: 600
      
 mybatis:
   type-aliases-package: cn.lhfei.engine.orm.mapper
