@@ -91,7 +91,7 @@ public class BrowselogBaseResource extends AbstractResource {
 		
 		
 		for (int i = 0; i < steps; i++) {
-			steps = limit * i;
+			start = limit * i;
 			
 			jdbcTemplate.query(sql, new Object[] {start, limit}, new RowCallbackHandler() {
 				@Override
