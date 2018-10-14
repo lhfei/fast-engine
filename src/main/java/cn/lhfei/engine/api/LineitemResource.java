@@ -51,19 +51,18 @@ public class LineitemResource extends AbstractResource {
 		jdbcTemplate.query(sql, new Object[] { limit }, new RowCallbackHandler() {
 			@Override
 			public void processRow(ResultSet rs) throws SQLException {
+				int colsCount = rs.getMetaData().getColumnCount();
 				if (isFirstRow[0]) {
-					int colsCount = rs.getMetaData().getColumnCount();
 					for (int i = 1; i <= colsCount; i++) {
 						result.getColumns().add(rs.getMetaData().getColumnName(i));
 						result.getMetaData().getColumnLabels().add(rs.getMetaData().getColumnLabel(i));
 					}
 				}
 
-				int columnIndex = 1;
-				while (rs.next()) {// eval all columns
-					rs.getString(columnIndex);
-					result.getRows().add(rs.getString(columnIndex));
-					columnIndex++;
+				while (rs.next()) {// eval all rows
+					for(int i = 1; i <= colsCount; i++) { // // eval all columns
+						result.getRows().add(rs.getString(i));
+					}
 				}
 
 				isFirstRow[0] = false;
