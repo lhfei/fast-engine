@@ -20,6 +20,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,9 +62,12 @@ public class LineitemResource extends AbstractResource {
 				}
 
 				while (rs.next()) {// eval all rows
+					List<String> row = new ArrayList<>();
 					for(int i = 1; i <= colsCount; i++) { // // eval all columns
-						result.getRows().add(rs.getString(i));
+						row.add(rs.getString(i));
 					}
+					
+					result.getRows().add(row);
 				}
 
 				isFirstRow[0] = false;

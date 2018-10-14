@@ -37,11 +37,11 @@ public class QueryResult {
 		this.columns = columns;
 	}
 
-	public List<String> getRows() {
+	public List<List<String>> getRows() {
 		return rows;
 	}
 
-	public void setRows(List<String> rows) {
+	public void setRows(List<List<String>> rows) {
 		this.rows = rows;
 	}
 
@@ -54,7 +54,7 @@ public class QueryResult {
 	}
 
 	private Collection<String> columns = new ArrayList<String>();
-	private List<String> rows = new ArrayList<String>();
+	private List<List<String>> rows = new ArrayList<List<String>>();
 	private TableMetaDataModel metaData = new TableMetaDataModel();
 	
 }
