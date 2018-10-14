@@ -40,38 +40,40 @@ import cn.lhfei.engine.web.model.QueryResult;
 @RestController
 @RequestMapping("/")
 public class LineitemResource extends AbstractResource {
-	
+
 	@RequestMapping(value = "/lineitems", method = GET)
 	public QueryResult getFiles(@RequestParam Integer limit) throws ClassNotFoundException, SQLException {
-		
+
 		String sql = "SELECT * FROM benchmark.ontime LIMIT ?";
 		QueryResult result = new QueryResult();
-		
-		int rowIndex = 1;
-		jdbcTemplate.query(sql, new Object[] {limit}, new RowCallbackHandler() {
+
+		boolean[] isFirstRow = { true };
+		jdbcTemplate.query(sql, new Object[] { limit }, new RowCallbackHandler() {
 			@Override
 			public void processRow(ResultSet rs) throws SQLException {
-				if(rowIndex == 1) {
+				if (isFirstRow[0]) {
 					int colsCount = rs.getMetaData().getColumnCount();
-					for(int i = 1; i <= colsCount; i++) {
+					for (int i = 1; i <= colsCount; i++) {
 						result.getColumns().add(rs.getMetaData().getColumnName(i));
 						result.getMetaData().getColumnLabels().add(rs.getMetaData().getColumnLabel(i));
 					}
 				}
-				
+
 				int columnIndex = 1;
-				while(rs.next()) {// eval all columns 
+				while (rs.next()) {// eval all columns
 					rs.getString(columnIndex);
 					result.getRows().add(rs.getString(columnIndex));
-					columnIndex ++;
+					columnIndex++;
 				}
-				
-			}});
-		
+
+				isFirstRow[0] = false;
+
+			}
+		});
+
 		return result;
 	}
-	
-	
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 }

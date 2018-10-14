@@ -18,7 +18,7 @@ spring:
     driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
     url: jdbc:clickhouse://10.182.57.104:8123/benchmark
     username: default
-    password: 
+    password: Lhfei
     
 #    druid:
 #      initial-size: 5
