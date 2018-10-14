@@ -55,6 +55,6 @@ public class QueryResult {
 
 	private Collection<String> columns = new ArrayList<String>();
 	private List<String> rows = new ArrayList<String>();
-	private TableMetaDataModel metaData;
+	private TableMetaDataModel metaData = new TableMetaDataModel();
 	
 }
