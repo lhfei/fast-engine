@@ -20,15 +20,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.lhfei.engine.web.model.QueryResult;
 
 /**
  * @version 0.1
@@ -42,21 +42,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class LineitemResource extends AbstractResource {
 	
 	@RequestMapping(value = "/lineitems", method = GET)
-	public List<String> getFiles(@RequestParam Integer limit) throws ClassNotFoundException, SQLException {
+	public QueryResult getFiles(@RequestParam Integer limit) throws ClassNotFoundException, SQLException {
 		
 		String sql = "SELECT * FROM benchmark.ontime LIMIT ?";
-		List<String> result = new ArrayList<>();
+		QueryResult result = new QueryResult();
 		
-		jdbcTemplate.query(sql, new Object[] {limit}, new RowMapper<List<String>>() {
-
+		int rowIndex = 1;
+		jdbcTemplate.query(sql, new Object[] {limit}, new RowCallbackHandler() {
 			@Override
-			public List<String> mapRow(ResultSet rs, int rowNum) throws SQLException {
-				while(rs.next()){
-					result.add(rs.getString(1));
+			public void processRow(ResultSet rs) throws SQLException {
+				if(rowIndex == 1) {
+					int colsCount = rs.getMetaData().getColumnCount();
+					for(int i = 1; i <= colsCount; i++) {
+						result.getColumns().add(rs.getMetaData().getColumnName(i));
+						result.getMetaData().getColumnLabels().add(rs.getMetaData().getColumnLabel(i));
+					}
 				}
-				return result;
-			}
-		});
+				
+				int columnIndex = 1;
+				while(rs.next()) {// eval all columns 
+					rs.getString(columnIndex);
+					result.getRows().add(rs.getString(columnIndex));
+					columnIndex ++;
+				}
+				
+			}});
 		
 		return result;
 	}

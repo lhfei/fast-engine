@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,7 @@ public class BrowselogBaseResource extends AbstractResource {
 			jdbcTemplate.query(sql, new Object[] {start, limit}, new RowCallbackHandler() {
 				@Override
 				public void processRow(ResultSet rs) throws SQLException {
+					ResultSetMetaData meta = rs.getMetaData();
 					while(rs.next()){
 						sb.append(rs.getString(1));
 						sb.append(",");
