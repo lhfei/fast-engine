@@ -61,17 +61,14 @@ public class LineitemResource extends AbstractResource {
 					}
 				}
 
-				while (rs.next()) {// eval all rows
-					List<String> row = new ArrayList<>();
-					for(int i = 1; i <= colsCount; i++) { // // eval all columns
-						row.add(rs.getString(i));
-					}
-					
-					result.getRows().add(row);
+				List<String> row = new ArrayList<>();
+				for(int i = 1; i <= colsCount; i++) { // // eval all columns
+					row.add(rs.getString(i));
 				}
+				
+				result.getRows().add(row);
 
 				isFirstRow[0] = false;
-
 			}
 		});
 
