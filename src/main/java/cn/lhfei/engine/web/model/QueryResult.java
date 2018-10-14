@@ -16,6 +16,7 @@
 
 package cn.lhfei.engine.web.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,8 +53,8 @@ public class QueryResult {
 		this.metaData = metaData;
 	}
 
-	private Collection<String> columns;
-	private List<String> rows;
+	private Collection<String> columns = new ArrayList<String>();
+	private List<String> rows = new ArrayList<String>();
 	private TableMetaDataModel metaData;
 	
 }

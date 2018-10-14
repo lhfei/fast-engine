@@ -16,6 +16,7 @@
 
 package cn.lhfei.engine.web.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -54,6 +55,6 @@ public class TableMetaDataModel {
 	}
 	private String schemaName;
 	private String tableName;
-	private Collection<String> columnLabels;
-	private Collection<String> columnNames;
+	private Collection<String> columnLabels = new ArrayList<String>();
+	private Collection<String> columnNames = new ArrayList<String>();
 }
